@@ -1,0 +1,22 @@
+erDiagram
+    m[Marche] {
+        int id
+        String nom
+    }
+    m ||--o{ o: place
+    o[Offre] {
+        int id
+    }
+    o |o--|{ b: possede
+    b[Bloc] {
+        int id
+        int quantiteEnergieMW
+        int prixPlancher
+        int pasHoraire
+    }
+    p[Parc] {
+        int id
+        int type
+        int capaciteHoraire
+    }
+    p }|--o{ b: produit
