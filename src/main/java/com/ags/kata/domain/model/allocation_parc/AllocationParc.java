@@ -27,11 +27,11 @@ public class AllocationParc {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AllocationParc that = (AllocationParc) o;
-        return quantite == that.quantite && Objects.equals(id, that.id);
+        return quantite == that.quantite && Objects.equals(id, that.id) && Objects.equals(parcId, that.parcId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quantite);
+        return Objects.hash(id, parcId, quantite);
     }
 }

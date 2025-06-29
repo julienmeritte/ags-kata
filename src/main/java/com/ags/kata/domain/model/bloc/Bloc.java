@@ -63,11 +63,11 @@ public class Bloc {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bloc bloc = (Bloc) o;
-        return quantiteEnergieMW == bloc.quantiteEnergieMW && positionJournee == bloc.positionJournee && Objects.equals(id, bloc.id) && Objects.equals(prixPlancher, bloc.prixPlancher) && Objects.equals(jour, bloc.jour);
+        return quantiteEnergieMW == bloc.quantiteEnergieMW && positionJournee == bloc.positionJournee && Objects.equals(id, bloc.id) && Objects.equals(prixPlancher, bloc.prixPlancher) && Objects.equals(jour, bloc.jour) && Objects.equals(allocations, bloc.allocations);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, quantiteEnergieMW, positionJournee, prixPlancher, jour);
+        return Objects.hash(id, quantiteEnergieMW, positionJournee, prixPlancher, jour, allocations);
     }
 }
