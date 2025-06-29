@@ -34,4 +34,16 @@ public class AllocationParc {
     public int hashCode() {
         return Objects.hash(id, parcId, quantite);
     }
+
+    public AllocationParcId getId() {
+        return id;
+    }
+
+    public ParcId getParcId() {
+        return parcId;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
 }
