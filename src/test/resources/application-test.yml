@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    show-sql: true
+  config:
+    import:
+      - classpath:application.yml
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG

@@ -13,7 +13,6 @@ import lombok.*;
 public class ParcEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "parc_seq")
     @SequenceGenerator(name = "parc_seq", sequenceName = "parc_seq", allocationSize = 1)
     @Column(name = "id")
     private long id;
