@@ -3,20 +3,26 @@ erDiagram
         int id
         String nom
     }
-    m ||--o{ o: place
     o[Offre] {
         int id
     }
+    m ||--o{ o: place
     o |o--|{ b: possede
     b[Bloc] {
         int id
         int quantiteEnergieMW
-        int prixPlancher
-        int pasHoraire
+        BigDecimal prixPlancher
+        int positionJournee
+        Date jour
     }
     p[Parc] {
         int id
         int type
-        int capaciteHoraire
+        int capaciteHoraireMW
     }
-    p }|--o{ b: produit
+    a[AllocationParc] {
+        int id
+        int quantite
+    }
+    b }|--o{ a: alloue
+    p }|--o{ a: produit

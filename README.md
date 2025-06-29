@@ -5,10 +5,13 @@
 Marche: Marché sur lequel est posée une offre
 
 Offre: Offre de Vente placée sur les marchés et contenant des blocs horaires.
+
 - Placée sur les marchés (1)
 - Composée de blocs (1 -> n)
 
-Bloc: Bloc horaire contenant la quantité d'énergie qui sera produite (en MW) et un prix plancher au-dessous duquel on ne vendra pas.
+Bloc: Bloc horaire contenant la quantité d'énergie qui sera produite (en MW) et un prix plancher au-dessous duquel on ne
+vendra pas.
+
 - Représente un "bloc horaire" (Soit par pas, soit libre via dates)
 
 Parc: Parc de Production d'électricité capable de fournir un nombre de MégaWatt pendant la durée d'un bloc horaire.
@@ -21,9 +24,21 @@ Parc: Parc de Production d'électricité capable de fournir un nombre de MégaWa
 - Lister les parcs qui vendent sur un marche: GET /parc/marche
 
 ### Questionnements
-- "Sur chacun de ces marchés Agregio peut placer une offre composée de plusieurs "blocs" horaires (une journée de 24h pourrait contenir 8 blocs de 3 heures)." -> **Ces blocs sont successifs ?**
-  - *Choix KISS par défaut*: Les Blocs sont successifs
+
+- "Sur chacun de ces marchés Agregio peut placer une offre composée de plusieurs "blocs" horaires (une journée de 24h
+  pourrait contenir 8 blocs de 3 heures)." -> **Ces blocs sont successifs ?**
+    - *Choix KISS par défaut*: Les Blocs sont successifs
 - **Quelle est la durée d'une offre ?**
-  - *Choix KISS par défaut*: Pour coller à l'exemple et rester simple, une offre va pouvoir durer n * 3h, chaque pas de 3H correspondant à un bloc.
+    - *Choix KISS par défaut*: Pour coller à l'exemple et rester simple, une offre va pouvoir durer n * 3h, chaque pas
+      de 3H correspondant à un bloc.
 - **A quoi correspond la durée d'un bloc horaire ? Est-ce un début et une fin avec une précision en secondes ?**
-  - *Choix KISS par défaut*: D'après l'exemple, un bloc va correspondre à un pas de 3H.
+    - *Choix KISS par défaut*: D'après l'exemple, un bloc va correspondre à un pas de 3H.
+- **Comment se comporte la relation Bloc et Parc ? Un Bloc de 100MW qui aurait assigné un Parc qui produit 60MW
+  nécessiterait 40MW d'un autre parc. Inversement, un parc qui produit 110MW pourrait produire 10MW pour un autre bloc.
+  **
+    - *Choix Cohérence par défaut*: Pour permettre ce découpage, création d'une notion intermédiaire AllocationParc
+      reliant une quantité produite d'un parc sur un bloc et ainsi affiner l'assignation Bloc-Parc.
+
+## Améliorations futures
+
+- Exclusions des getters/setters via outil OU ajout tests pour garantir un domaine pur
