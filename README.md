@@ -54,6 +54,11 @@ Parc: Parc de Production d'électricité capable de fournir un nombre de MégaWa
 - Exclusions des getters/setters via outil OU ajout tests pour garantir un domaine pur
 - Finir d'affiner les tests (Tests copies défensives etc...)
 - Paginer les API de consultation
+- Monitoring/métriques Production
+- Mise en cache (Si le besoin évolue et devient plus conséquent)
+- Configuration par environnement
+- Dockerfile prodution
+- Authentification via Spring Security (si nécessaire)
 
 ### Clean code
 
@@ -67,4 +72,4 @@ Parc: Parc de Production d'électricité capable de fournir un nombre de MégaWa
 
 ### REX
 
-- Sequences complexes au sein du DDD -> Revenir à du UUID ?
+- Sequences complexes au sein du DDD -> Direction vers UUID.
