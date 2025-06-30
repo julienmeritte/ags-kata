@@ -5,6 +5,8 @@ erDiagram
     }
     o[Offre] {
         int id
+        String acteur
+        LocalDate jour
     }
     m ||--o{ o: place
     o |o--|{ b: possede
@@ -13,7 +15,6 @@ erDiagram
         int quantiteEnergieMW
         BigDecimal prixPlancher
         int positionJournee
-        Date jour
     }
     p[Parc] {
         int id

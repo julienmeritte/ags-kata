@@ -14,6 +14,6 @@ class MarcheIdTest {
 
     @Test
     void shouldFail_WhenInstanciatingMarcheId_GivenNegativeValue() {
-        assertThrows(IllegalArgumentException.class, () -> new MarcheId(-1L));
+        assertThrows(IllegalArgumentException.class, () -> new MarcheId(0L));
     }
 }

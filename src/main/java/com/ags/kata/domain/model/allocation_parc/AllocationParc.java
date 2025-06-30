@@ -5,6 +5,9 @@ import com.ags.kata.domain.model.parc.ParcId;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Allocation entre un bloc et un parc permettant de combler la demande des blocs en production électrique.
+ */
 public class AllocationParc {
     private final AllocationParcId id;
     private final ParcId parcId;
@@ -22,6 +25,18 @@ public class AllocationParc {
         this.quantite = quantite;
     }
 
+    public AllocationParcId getId() {
+        return id;
+    }
+
+    public ParcId getParcId() {
+        return parcId;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -33,17 +48,5 @@ public class AllocationParc {
     @Override
     public int hashCode() {
         return Objects.hash(id, parcId, quantite);
-    }
-
-    public AllocationParcId getId() {
-        return id;
-    }
-
-    public ParcId getParcId() {
-        return parcId;
-    }
-
-    public int getQuantite() {
-        return quantite;
     }
 }

@@ -7,7 +7,7 @@ import static com.ags.kata.utils.ParcUtils.PARC_ID;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class AllocationParcTest {
+class AllocationParcEntityTest {
 
     @Test
     void shouldBeValid_WhenInstanciatingAllocationParc_GivenValidDate() {

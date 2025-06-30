@@ -3,6 +3,9 @@ package com.ags.kata.domain.model.marche;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Marché: Entité sur laquelle sont posée des Offres
+ */
 public class Marche {
     private final MarcheId id;
     private String nom;
@@ -15,12 +18,8 @@ public class Marche {
                 .orElseThrow(() -> new IllegalArgumentException("Un Marche doit posséder un nom"));
     }
 
-    public Marche(Marche marche) {
-        this(marche.id, marche.nom);
-    }
-
-    public Marche copy() {
-        return new Marche(this);
+    public static Marche copyOf(Marche marche) {
+        return new Marche(marche.id, marche.nom);
     }
 
     public MarcheId getId() {

@@ -15,6 +15,6 @@ class ParcIdTest {
 
     @Test
     void shouldFail_WhenInstanciatingParcId_GivenNegativeValue() {
-        assertThrows(IllegalArgumentException.class, () -> new ParcId(-1L));
+        assertThrows(IllegalArgumentException.class, () -> new ParcId(0L));
     }
 }

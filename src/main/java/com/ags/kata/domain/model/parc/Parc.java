@@ -3,6 +3,9 @@ package com.ags.kata.domain.model.parc;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Parc de production électrique.
+ */
 public class Parc {
     private final ParcId id;
     private String nom;
@@ -23,19 +26,6 @@ public class Parc {
         this.capaciteHoraireMW = capaciteHoraireMW;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Parc parc = (Parc) o;
-        return capaciteHoraireMW == parc.capaciteHoraireMW && Objects.equals(id, parc.id) && Objects.equals(nom, parc.nom) && type == parc.type;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nom, type, capaciteHoraireMW);
-    }
-
     public ParcId getId() {
         return id;
     }
@@ -50,5 +40,18 @@ public class Parc {
 
     public int getCapaciteHoraireMW() {
         return capaciteHoraireMW;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Parc parc = (Parc) o;
+        return capaciteHoraireMW == parc.capaciteHoraireMW && Objects.equals(id, parc.id) && Objects.equals(nom, parc.nom) && type == parc.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nom, type, capaciteHoraireMW);
     }
 }

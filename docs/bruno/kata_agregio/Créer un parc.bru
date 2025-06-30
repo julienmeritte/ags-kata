@@ -1,0 +1,19 @@
+meta {
+  name: Créer un parc
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/parc
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nom": "Parc Bruno",
+    "type": "SOLAIRE",
+    "capaciteHoraireMW": 1200
+  }
+}

@@ -1,0 +1,25 @@
+meta {
+  name: Créer une Offre
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/offre
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "marcheId": 1,
+    "jour": "2025-06-01",
+    "blocs": [
+      {
+        "prixPlancher": 30,
+        "quantiteEnergieMW": "4500",
+        "positionJournee": 0
+      }
+    ]
+  }
+}

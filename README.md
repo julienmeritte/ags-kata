@@ -30,15 +30,23 @@ Parc: Parc de Production d'électricité capable de fournir un nombre de MégaWa
     - *Choix KISS par défaut*: Les Blocs sont successifs
 - **Quelle est la durée d'une offre ?**
     - *Choix KISS par défaut*: Pour coller à l'exemple et rester simple, une offre va pouvoir durer n * 3h, chaque pas
-      de 3H correspondant à un bloc.
+      de 3H correspondant à un bloc. Pour une durée maximum de 24h, soit 8 blocs de 3h.
 - **A quoi correspond la durée d'un bloc horaire ? Est-ce un début et une fin avec une précision en secondes ?**
     - *Choix KISS par défaut*: D'après l'exemple, un bloc va correspondre à un pas de 3H.
+- **Comment gérer le passage d'une journée à l'autre ?**
+  - *Choix KISS par défaut**: Un bloc de 3H correspond à une position sur 24H se position sur une heure complète multiple de 3 ou égale à 0 (0H, 3H, 6H, ...21H).
+- **A quoi exactement correpond une Offre de Vente ? Peuvent-elles se chevaucher ?**
+  - *Choix Cohérence*: On part du principe qu'il peut y avoir plusieurs offres sur les même créneaux des même jour, tant que la capacité de production est respectée. Car il semble plus logique de ne pas laisser dormir de la production en permettant plusieurs offres simultanées plutôt que de sélectionner le choix KISS.
 - **Comment se comporte la relation Bloc et Parc ? Un Bloc de 100MW qui aurait assigné un Parc qui produit 60MW
-  nécessiterait 40MW d'un autre parc. Inversement, un parc qui produit 110MW pourrait produire 10MW pour un autre bloc.
-  **
+  nécessiterait 40MW d'un autre parc. Inversement, un parc qui produit 110MW pourrait produire 10MW pour un autre bloc.**
     - *Choix Cohérence par défaut*: Pour permettre ce découpage, création d'une notion intermédiaire AllocationParc
       reliant une quantité produite d'un parc sur un bloc et ainsi affiner l'assignation Bloc-Parc.
 
 ## Améliorations futures
-
+#### Technique
+- Tests d'intégration
 - Exclusions des getters/setters via outil OU ajout tests pour garantir un domaine pur
+
+#### Fonctionnel
+- Utilisation de créneaux plus précis.
+- Utilisation de blocs non successifs

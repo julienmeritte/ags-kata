@@ -1,11 +1,15 @@
 package com.ags.kata.utils;
 
+import com.ags.kata.application.dto.request.CreationParcRequestDto;
 import com.ags.kata.application.dto.response.ParcResponseDto;
 import com.ags.kata.domain.model.parc.Parc;
 import com.ags.kata.domain.model.parc.ParcId;
 import com.ags.kata.domain.model.parc.ParcType;
 
-public class ParcUtils {
+public final class ParcUtils {
+
+    private ParcUtils() {
+    }
 
     public static ParcId PARC_ID = new ParcId(54L);
     public static String PARC_NOM = "Parc du test";
@@ -18,5 +22,9 @@ public class ParcUtils {
 
     public static ParcResponseDto creerParcResponseDto() {
         return new ParcResponseDto(PARC_ID.id(), PARC_NOM, PARC_TYPE, PARC_CAPACITE_HORAIRE_MW);
+    }
+
+    public static CreationParcRequestDto creerCreationParcRequestDto() {
+        return new CreationParcRequestDto(PARC_NOM, PARC_TYPE, PARC_CAPACITE_HORAIRE_MW);
     }
 }

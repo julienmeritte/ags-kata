@@ -1,20 +1,25 @@
 package com.ags.kata.infrastructure.adapter.persistence.parc;
 
 import com.ags.kata.domain.model.parc.ParcType;
+import com.ags.kata.infrastructure.adapter.persistence.allocation_parc.AllocationParcEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @Table(name = "parc")
+@Builder
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class ParcEntity {
 
     @Id
     @SequenceGenerator(name = "parc_seq", sequenceName = "parc_seq", allocationSize = 1)
-    @Column(name = "id")
     private long id;
 
     @Column(nullable = false)
@@ -26,4 +31,21 @@ public class ParcEntity {
 
     @Column(name = "capacite_horaire_mw", nullable = false)
     private int capaciteHoraireMW;
+
+    @OneToMany(mappedBy = "parc")
+    @ToString.Exclude
+    private Set<AllocationParcEntity> allocationParcs = Set.of();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ParcEntity that = (ParcEntity) o;
+        return id == that.id && capaciteHoraireMW == that.capaciteHoraireMW && Objects.equals(nom, that.nom) && type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nom, type, capaciteHoraireMW);
+    }
 }

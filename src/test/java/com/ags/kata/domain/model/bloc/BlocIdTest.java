@@ -15,6 +15,6 @@ class BlocIdTest {
 
     @Test
     void shouldFail_WhenInstanciatingBlocId_GivenNegativeValue() {
-        assertThrows(IllegalArgumentException.class, () -> new BlocId(-1L));
+        assertThrows(IllegalArgumentException.class, () -> new BlocId(0L));
     }
 }

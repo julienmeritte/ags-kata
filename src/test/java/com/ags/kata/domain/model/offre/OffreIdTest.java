@@ -14,6 +14,6 @@ class OffreIdTest {
 
     @Test
     void shouldFail_WhenInstanciatingOffreId_GivenNegativeValue() {
-        assertThrows(IllegalArgumentException.class, () -> new OffreId(-1L));
+        assertThrows(IllegalArgumentException.class, () -> new OffreId(0L));
     }
 }

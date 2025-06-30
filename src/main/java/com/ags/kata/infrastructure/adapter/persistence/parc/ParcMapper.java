@@ -3,13 +3,16 @@ package com.ags.kata.infrastructure.adapter.persistence.parc;
 import com.ags.kata.domain.model.parc.Parc;
 import com.ags.kata.domain.model.parc.ParcId;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
+
+import java.util.Set;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ParcMapper {
 
     Parc toDomain(ParcEntity entity);
+
+    Set<Parc> toDomain(Set<ParcEntity> entities);
 
     ParcEntity toEntity(Parc parc);
 

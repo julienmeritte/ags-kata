@@ -3,8 +3,6 @@ package com.ags.kata.infrastructure.adapter.persistence.parc;
 import com.ags.kata.application.port.out.ParcCommandRepository;
 import com.ags.kata.domain.model.parc.Parc;
 import com.ags.kata.domain.model.parc.ParcId;
-import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
