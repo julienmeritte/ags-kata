@@ -4,6 +4,7 @@ import com.ags.kata.domain.model.bloc.Bloc;
 import com.ags.kata.domain.model.marche.Marche;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -13,24 +14,23 @@ import java.util.Set;
  */
 public class Offre {
     private final OffreId id;
-    private String acteur;
-    private Marche marche;
-    private LocalDate jour;
-    private Set<Bloc> blocs;
+    private final String acteur;
+    private final Marche marche;
+    private final LocalDate jour;
+    private final Set<Bloc> blocs;
+
+    public static final String ACTEUR_AGREGIO = "Agregio Solutions";
 
     public Offre(OffreId id, String acteur, Marche marche, LocalDate jour, Set<Bloc> blocs) {
-        this.id = Optional.ofNullable(id)
-                .orElseThrow(() -> new IllegalArgumentException("Une offre doit posséder un id."));
+        this.id = Objects.requireNonNull(id, "Une offre doit posséder un id.");
         this.acteur = Optional.ofNullable(acteur)
                 .filter(a -> !a.isBlank())
                 .orElseThrow(() -> new IllegalArgumentException("Une offre doit être proposée par un acteur"));
-        this.marche = Optional.ofNullable(marche)
-                .orElseThrow(() -> new IllegalArgumentException("Une offre doit impérativement être posée sur un marché"));
-        this.jour = Optional.ofNullable(jour)
-                .orElseThrow(() -> new IllegalArgumentException("Une offre doit être positionnée sur une journée"));
+        this.marche = Objects.requireNonNull(marche, "Une offre doit impérativement être posée sur un marché");
+        this.jour = Objects.requireNonNull(jour, "Une offre doit être positionnée sur une journée");
         this.blocs = Optional.ofNullable(blocs)
                 .filter(set -> !set.isEmpty())
-                .map(Set::copyOf)
+                .map(HashSet::new)
                 .orElseThrow(() -> new IllegalArgumentException("Une offre doit impérativement avoir des blocs d'énergie produite à vendre sur le marché."));
     }
 
@@ -51,7 +51,7 @@ public class Offre {
     }
 
     public Set<Bloc> getBlocs() {
-        return Set.copyOf(blocs);
+        return new HashSet<>(blocs);
     }
 
     @Override
@@ -65,5 +65,16 @@ public class Offre {
     @Override
     public int hashCode() {
         return Objects.hash(id, acteur, marche, jour, blocs);
+    }
+
+    @Override
+    public String toString() {
+        return "Offre{" +
+                "id=" + id +
+                ", acteur='" + acteur + '\'' +
+                ", marche=" + marche +
+                ", jour=" + jour +
+                ", blocs=" + blocs +
+                '}';
     }
 }

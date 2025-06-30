@@ -17,7 +17,7 @@ class MarcheTest {
 
     @Test
     void shouldFail_WhenCreatingMarche_GivenNullId() {
-        assertThrows(IllegalArgumentException.class, () -> new Marche(null, MARCHE_NOM));
+        assertThrows(NullPointerException.class, () -> new Marche(null, MARCHE_NOM));
     }
 
     @Test

@@ -4,6 +4,8 @@ import com.ags.kata.application.dto.response.AllocationParcResponseDto;
 import com.ags.kata.domain.model.allocation_parc.AllocationParc;
 import com.ags.kata.domain.model.allocation_parc.AllocationParcId;
 
+import java.util.UUID;
+
 import static com.ags.kata.utils.ParcUtils.PARC_ID;
 
 public final class AllocationParcUtils {
@@ -11,7 +13,7 @@ public final class AllocationParcUtils {
     private AllocationParcUtils() {
     }
 
-    public static final AllocationParcId ALLOCATION_PARC_ID = new AllocationParcId(23L);
+    public static final AllocationParcId ALLOCATION_PARC_ID = new AllocationParcId(UUID.randomUUID());
     public static final int ALLOCATION_PARC_QUANTITE = 8;
 
     public static AllocationParc creerAllocationParc() {

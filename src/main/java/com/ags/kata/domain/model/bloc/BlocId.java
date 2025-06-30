@@ -1,10 +1,12 @@
 package com.ags.kata.domain.model.bloc;
 
-public record BlocId(long id) {
+import java.util.UUID;
+
+public record BlocId(UUID id) {
 
     public BlocId {
-        if (id <= 0) {
-            throw new IllegalArgumentException("Id Bloc doit être positif");
+        if (id == null) {
+            id = UUID.randomUUID();
         }
     }
 }

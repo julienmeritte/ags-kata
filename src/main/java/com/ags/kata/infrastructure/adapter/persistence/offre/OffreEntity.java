@@ -7,7 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "offre")
@@ -20,8 +22,8 @@ import java.util.Set;
 public class OffreEntity {
 
     @Id
-    @SequenceGenerator(name = "offre_seq", sequenceName = "offre_seq", allocationSize = 1)
-    private long id;
+    @Column(columnDefinition = "VARCHAR(36)", unique = true, nullable = false)
+    private UUID id;
 
     @NotBlank
     @Column(nullable = false)
@@ -35,5 +37,5 @@ public class OffreEntity {
     private MarcheEntity marche;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "offre", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<BlocEntity> blocs = Set.of();
+    private Set<BlocEntity> blocs = new HashSet<>();
 }

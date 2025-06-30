@@ -10,7 +10,9 @@ import jakarta.validation.constraints.Positive;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "bloc")
@@ -23,27 +25,27 @@ import java.util.Set;
 public class BlocEntity {
 
     @Id
-    @SequenceGenerator(name = "bloc_seq", sequenceName = "bloc_seq", allocationSize = 1)
-    private long id;
+    @Column(columnDefinition = "VARCHAR(36)", unique = true, nullable = false)
+    private UUID id;
 
-    @Column(nullable = false)
+    @Column(name = "quantite_energie_mw", nullable = false)
     @Positive
     private int quantiteEnergieMW;
 
-    @Column(nullable = false)
+    @Column(name = "prix_plancher", nullable = false)
     @NotNull
     private BigDecimal prixPlancher;
 
-    @Column(nullable = false)
+    @Column(name = "position_journee", nullable = false)
     @Min(0)
     @Max(7)
     private int positionJournee;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_offre", nullable = false)
+    @JoinColumn(name = "id_offre")
     @ToString.Exclude
     private OffreEntity offre;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "bloc", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<AllocationParcEntity> allocationsParcs;
+    private Set<AllocationParcEntity> allocations = new HashSet<>();
 }

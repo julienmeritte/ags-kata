@@ -14,4 +14,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(404)
                 .body(new BasicMessageResponseDto(ex.getMessage()));
     }
+
+    @ExceptionHandler(ManqueCapaciteProductionParc.class)
+    public ResponseEntity<BasicMessageResponseDto> handleManqueCapaciteProductionParc(ManqueCapaciteProductionParc ex) {
+        return ResponseEntity.status(409)
+                .body(new BasicMessageResponseDto(ex.getMessage()));
+    }
 }

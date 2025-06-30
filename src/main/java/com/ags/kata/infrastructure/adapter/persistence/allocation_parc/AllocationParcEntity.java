@@ -5,6 +5,8 @@ import com.ags.kata.infrastructure.adapter.persistence.parc.ParcEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "allocation_parc")
 @Builder
@@ -16,8 +18,8 @@ import lombok.*;
 public class AllocationParcEntity {
 
     @Id
-    @SequenceGenerator(name = "alloc_parc_seq", sequenceName = "alloc_parc_seq", allocationSize = 1)
-    private long id;
+    @Column(columnDefinition = "VARCHAR(36)", unique = true, nullable = false)
+    private UUID id;
 
     @Column(nullable = false)
     private int quantite;

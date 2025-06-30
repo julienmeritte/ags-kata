@@ -11,10 +11,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.Set;
 
-import static com.ags.kata.utils.EntityUtils.*;
+import static com.ags.kata.utils.MarcheUtils.MARCHE_ID;
 import static com.ags.kata.utils.MarcheUtils.MARCHE_NOM;
-import static com.ags.kata.utils.OffreUtils.OFFRE_ACTEUR;
-import static com.ags.kata.utils.OffreUtils.OFFRE_JOUR;
+import static com.ags.kata.utils.OffreUtils.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -30,7 +29,7 @@ class OffreEntityTest {
     @BeforeEach
     void setUp() {
         marche = entityManager.persistAndFlush(MarcheEntity.builder()
-                .id(prochainId(MARCHE_SEQ, entityManager))
+                .id(MARCHE_ID.id())
                 .nom(MARCHE_NOM)
                 .build());
     }
@@ -38,7 +37,7 @@ class OffreEntityTest {
     @Test
     void shouldPersist_WhenSavingOffreEntity_GivenValidData() {
         OffreEntity offreEntity = OffreEntity.builder()
-                .id(prochainId(OFFRE_SEQ, entityManager))
+                .id(OFFRE_ID.id())
                 .acteur(OFFRE_ACTEUR)
                 .marche(marche)
                 .jour(OFFRE_JOUR)
@@ -53,7 +52,7 @@ class OffreEntityTest {
     @Test
     void shouldThrowsConstraintsViolationJakarta_WhenSavingOffreEntity_GivenNullActeur() {
         OffreEntity offreEntity = OffreEntity.builder()
-                .id(prochainId(OFFRE_SEQ, entityManager))
+                .id(OFFRE_ID.id())
                 .acteur(null)
                 .marche(marche)
                 .jour(OFFRE_JOUR)
@@ -66,7 +65,7 @@ class OffreEntityTest {
     @Test
     void shouldThrowsConstraintsViolationHibernate_WhenSavingOffreEntity_GivenNullJour() {
         OffreEntity offreEntity = OffreEntity.builder()
-                .id(prochainId(OFFRE_SEQ, entityManager))
+                .id(OFFRE_ID.id())
                 .acteur(OFFRE_ACTEUR)
                 .marche(marche)
                 .jour(null)
@@ -79,7 +78,7 @@ class OffreEntityTest {
     @Test
     void shouldThrowsConstraintsViolationJakarta_WhenSavingOffreEntity_GivenBlankActeur() {
         OffreEntity offreEntity = OffreEntity.builder()
-                .id(prochainId(OFFRE_SEQ, entityManager))
+                .id(OFFRE_ID.id())
                 .acteur(" ")
                 .marche(marche)
                 .jour(OFFRE_JOUR)

@@ -18,12 +18,12 @@ class ParcTest {
 
     @Test
     void shouldFail_WhenInstanciatingParc_GivenNullId() {
-        assertThrows(IllegalArgumentException.class, () -> new Parc(null, PARC_NOM, PARC_TYPE, PARC_CAPACITE_HORAIRE_MW));
+        assertThrows(NullPointerException.class, () -> new Parc(null, PARC_NOM, PARC_TYPE, PARC_CAPACITE_HORAIRE_MW));
     }
 
     @Test
     void shouldFail_WhenInstanciatingParc_GivenNullType() {
-        assertThrows(IllegalArgumentException.class, () -> new Parc(PARC_ID, PARC_NOM, null, PARC_CAPACITE_HORAIRE_MW));
+        assertThrows(NullPointerException.class, () -> new Parc(PARC_ID, PARC_NOM, null, PARC_CAPACITE_HORAIRE_MW));
     }
 
     @Test

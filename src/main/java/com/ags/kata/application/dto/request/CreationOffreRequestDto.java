@@ -6,7 +6,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
-public record CreationOffreRequestDto(long marcheId, @NotNull LocalDate jour,
+public record CreationOffreRequestDto(@NotNull UUID marcheId, @NotNull LocalDate jour,
                                       @Valid @NotEmpty Set<BlocRequestDto> blocs) {
 }

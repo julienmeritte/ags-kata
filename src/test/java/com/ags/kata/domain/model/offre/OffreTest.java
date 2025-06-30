@@ -24,7 +24,7 @@ class OffreTest {
     void shouldFail_WhenCreatingOffre_GivenNullId() {
         var marche = creerMarche();
         var blocs = Set.of(creerBloc());
-        assertThrows(IllegalArgumentException.class, () -> new Offre(null, OFFRE_ACTEUR, marche, OFFRE_JOUR, blocs));
+        assertThrows(NullPointerException.class, () -> new Offre(null, OFFRE_ACTEUR, marche, OFFRE_JOUR, blocs));
     }
 
     @Test
@@ -39,14 +39,14 @@ class OffreTest {
     @Test
     void shouldFail_WhenCreatingOffre_GivenNullMarche() {
         var blocs = Set.of(creerBloc());
-        assertThrows(IllegalArgumentException.class, () -> new Offre(OFFRE_ID, OFFRE_ACTEUR, null, OFFRE_JOUR, blocs));
+        assertThrows(NullPointerException.class, () -> new Offre(OFFRE_ID, OFFRE_ACTEUR, null, OFFRE_JOUR, blocs));
     }
 
     @Test
     void shouldFail_WhenCreatingOffre_GivenNullJour() {
         var marche = creerMarche();
         var blocs = Set.of(creerBloc());
-        assertThrows(IllegalArgumentException.class, () -> new Offre(OFFRE_ID, OFFRE_ACTEUR, marche, null, blocs));
+        assertThrows(NullPointerException.class, () -> new Offre(OFFRE_ID, OFFRE_ACTEUR, marche, null, blocs));
     }
 
     @Test

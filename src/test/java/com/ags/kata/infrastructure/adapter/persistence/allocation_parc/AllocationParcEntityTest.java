@@ -7,8 +7,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+import static com.ags.kata.utils.AllocationParcUtils.ALLOCATION_PARC_ID;
 import static com.ags.kata.utils.AllocationParcUtils.ALLOCATION_PARC_QUANTITE;
-import static com.ags.kata.utils.EntityUtils.*;
 import static com.ags.kata.utils.ParcUtils.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -22,14 +22,14 @@ class AllocationParcEntityTest {
     @Test
     void shouldPersist_WhenSavingAllocationParcEntity_GivenValidData() {
         var parc = entityManager.persistAndFlush(ParcEntity.builder()
-                .id(prochainId(PARC_SEQ, entityManager))
+                .id(PARC_ID.id())
                 .nom(PARC_NOM)
                 .type(PARC_TYPE)
                 .capaciteHoraireMW(PARC_CAPACITE_HORAIRE_MW)
                 .build());
 
         AllocationParcEntity allocationParcEntity = AllocationParcEntity.builder()
-                .id(prochainId(ALLOC_PARC_SEQ, entityManager))
+                .id(ALLOCATION_PARC_ID.id())
                 .quantite(ALLOCATION_PARC_QUANTITE)
                 .parc(parc)
                 .build();

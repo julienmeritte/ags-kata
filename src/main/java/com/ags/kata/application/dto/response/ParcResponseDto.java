@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-public record ParcResponseDto(@Positive long id, @NotBlank String nom, @NotNull ParcType type,
+import java.util.UUID;
+
+public record ParcResponseDto(@NotNull UUID id, @NotBlank String nom, @NotNull ParcType type,
                               @Positive int capaciteHoraireMW) {
 }

@@ -4,12 +4,14 @@ import com.ags.kata.application.dto.response.MarcheResponseDto;
 import com.ags.kata.domain.model.marche.Marche;
 import com.ags.kata.domain.model.marche.MarcheId;
 
+import java.util.UUID;
+
 public final class MarcheUtils {
 
     private MarcheUtils() {
     }
 
-    public static final MarcheId MARCHE_ID = new MarcheId(1L);
+    public static final MarcheId MARCHE_ID = new MarcheId(UUID.randomUUID());
     public static final String MARCHE_NOM = "Réserve de Test";
 
 

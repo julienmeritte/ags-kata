@@ -5,8 +5,10 @@ import com.ags.kata.infrastructure.adapter.persistence.allocation_parc.Allocatio
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "parc")
@@ -19,8 +21,8 @@ import java.util.Set;
 public class ParcEntity {
 
     @Id
-    @SequenceGenerator(name = "parc_seq", sequenceName = "parc_seq", allocationSize = 1)
-    private long id;
+    @Column(columnDefinition = "VARCHAR(36)", unique = true, nullable = false)
+    private UUID id;
 
     @Column(nullable = false)
     private String nom;
@@ -34,7 +36,7 @@ public class ParcEntity {
 
     @OneToMany(mappedBy = "parc")
     @ToString.Exclude
-    private Set<AllocationParcEntity> allocationParcs = Set.of();
+    private Set<AllocationParcEntity> allocationParcs = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

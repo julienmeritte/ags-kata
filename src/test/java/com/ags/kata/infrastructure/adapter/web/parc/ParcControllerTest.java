@@ -2,6 +2,7 @@ package com.ags.kata.infrastructure.adapter.web.parc;
 
 import com.ags.kata.application.dto.request.CreationParcRequestDto;
 import com.ags.kata.application.service.ParcCommandService;
+import com.ags.kata.application.service.ParcQueryService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ class ParcControllerTest {
 
     @MockitoBean
     private ParcCommandService parcCommandService;
+    @MockitoBean
+    private ParcQueryService parcQueryService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -39,7 +42,8 @@ class ParcControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(creerCreationParcRequestDto())))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").value(PARC_ID.id()))
+                .andExpect(jsonPath("$.id").value(PARC_ID.id()
+                        .toString()))
                 .andExpect(jsonPath("$.nom").value(PARC_NOM))
                 .andExpect(jsonPath("$.type").value(PARC_TYPE.toString()))
                 .andExpect(jsonPath("$.capaciteHoraireMW").value(PARC_CAPACITE_HORAIRE_MW));

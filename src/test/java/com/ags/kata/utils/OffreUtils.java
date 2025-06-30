@@ -7,6 +7,7 @@ import com.ags.kata.domain.model.offre.OffreId;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
 import static com.ags.kata.utils.BlocUtils.*;
 import static com.ags.kata.utils.MarcheUtils.*;
@@ -16,7 +17,7 @@ public final class OffreUtils {
     private OffreUtils() {
     }
 
-    public static final OffreId OFFRE_ID = new OffreId(33L);
+    public static final OffreId OFFRE_ID = new OffreId(UUID.randomUUID());
     public static final String OFFRE_ACTEUR = "Agregio Solutions";
     public static final LocalDate OFFRE_JOUR = LocalDate.now();
 

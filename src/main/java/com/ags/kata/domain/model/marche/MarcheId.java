@@ -1,10 +1,12 @@
 package com.ags.kata.domain.model.marche;
 
-public record MarcheId(long id) {
+import java.util.UUID;
+
+public record MarcheId(UUID id) {
 
     public MarcheId {
-        if (id <= 0) {
-            throw new IllegalArgumentException("Id Marché doit être positif");
+        if (id == null) {
+            id = UUID.randomUUID();
         }
     }
 }

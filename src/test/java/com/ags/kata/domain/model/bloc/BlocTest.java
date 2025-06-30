@@ -22,7 +22,7 @@ class BlocTest {
     @Test
     void shouldFail_WhenInstanciatingBloc_GivenNullId() {
         var allocations = Set.of(creerAllocationParc());
-        assertThrows(IllegalArgumentException.class, () -> new Bloc(null, BLOC_QUANTITE_ENERGIE_MW, BLOC_PRIX_PLANCHER, BLOC_POSITION_JOURNEE, allocations));
+        assertThrows(NullPointerException.class, () -> new Bloc(null, BLOC_QUANTITE_ENERGIE_MW, BLOC_PRIX_PLANCHER, BLOC_POSITION_JOURNEE, allocations));
     }
 
     @Test

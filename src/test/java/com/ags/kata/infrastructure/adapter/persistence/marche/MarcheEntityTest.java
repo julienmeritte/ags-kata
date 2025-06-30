@@ -7,8 +7,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import static com.ags.kata.utils.EntityUtils.MARCHE_SEQ;
-import static com.ags.kata.utils.EntityUtils.prochainId;
+import static com.ags.kata.utils.MarcheUtils.MARCHE_ID;
 import static com.ags.kata.utils.MarcheUtils.MARCHE_NOM;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,7 +22,7 @@ class MarcheEntityTest {
     @Test
     void shouldThrowsConstraintsViolationHibernate_WhenSavingMarcheEntity_GivenValidData() {
         MarcheEntity marcheEntity = MarcheEntity.builder()
-                .id(prochainId(MARCHE_SEQ, entityManager))
+                .id(MARCHE_ID.id())
                 .nom(MARCHE_NOM)
                 .build();
 
@@ -35,7 +34,7 @@ class MarcheEntityTest {
     @Test
     void shouldThrowsConstraintsViolationHibernate_WhenSavingMarcheEntity_GivenNullNom() {
         MarcheEntity marcheEntity = MarcheEntity.builder()
-                .id(prochainId(MARCHE_SEQ, entityManager))
+                .id(MARCHE_ID.id())
                 .nom(null)
                 .build();
 

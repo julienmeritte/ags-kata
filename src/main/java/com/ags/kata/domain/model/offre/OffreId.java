@@ -1,10 +1,12 @@
 package com.ags.kata.domain.model.offre;
 
-public record OffreId(long id) {
+import java.util.UUID;
+
+public record OffreId(UUID id) {
 
     public OffreId {
-        if (id <= 0) {
-            throw new IllegalArgumentException("Id Offre doit être positif");
+        if (id == null) {
+            id = UUID.randomUUID();
         }
     }
 }

@@ -11,8 +11,7 @@ public class Marche {
     private String nom;
 
     public Marche(MarcheId id, String nom) {
-        this.id = Optional.ofNullable(id)
-                .orElseThrow(() -> new IllegalArgumentException("Un marché doit posséder un id."));
+        this.id = Objects.requireNonNull(id, "Un marché doit posséder un id.");
         this.nom = Optional.ofNullable(nom)
                 .filter(n -> !n.isBlank())
                 .orElseThrow(() -> new IllegalArgumentException("Un Marche doit posséder un nom"));
@@ -41,5 +40,13 @@ public class Marche {
     @Override
     public int hashCode() {
         return Objects.hash(id, nom);
+    }
+
+    @Override
+    public String toString() {
+        return "Marche{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                '}';
     }
 }

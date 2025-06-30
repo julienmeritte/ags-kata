@@ -4,11 +4,11 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.UUID;
 
-public record OffreResponseDto(@Positive long id, @NotBlank String acteur, @NotNull @Valid MarcheResponseDto marche,
+public record OffreResponseDto(@NotNull UUID id, @NotBlank String acteur, @NotNull @Valid MarcheResponseDto marche,
                                @NotNull LocalDate jour, @NotEmpty @Valid Set<BlocResponseDto> blocs) {
 }

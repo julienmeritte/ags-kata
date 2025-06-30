@@ -24,3 +24,13 @@ spring:
     init:
       mode: always
       data-locations: classpath:data/data.sql
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    org.springframework.orm.jpa: DEBUG
+    org.springframework.transaction: DEBUG
+    # Vos packages pour voir vos logs custom
+    com.ags.kata: DEBUG

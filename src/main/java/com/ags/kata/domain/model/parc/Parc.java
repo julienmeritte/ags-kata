@@ -1,29 +1,36 @@
 package com.ags.kata.domain.model.parc;
 
 import java.util.Objects;
-import java.util.Optional;
+import java.util.Set;
 
 /**
  * Parc de production électrique.
  */
 public class Parc {
     private final ParcId id;
-    private String nom;
-    private ParcType type;
-    private int capaciteHoraireMW;
+    private final String nom;
+    private final ParcType type;
+    private final int capaciteHoraireMW;
 
     public Parc(ParcId id, String nom, ParcType type, int capaciteHoraireMW) {
-        this.id = Optional.ofNullable(id)
-                .orElseThrow(() -> new IllegalArgumentException("Un Parc doit posséder un ID."));
-        this.nom = Optional.ofNullable(nom)
-                .orElseThrow(() -> new IllegalArgumentException("Un Parc doit avoir un nom"));
-        this.type = Optional.ofNullable(type)
-                .orElseThrow(() -> new IllegalArgumentException("Un Parc doit avoir un type"));
+        this.id = Objects.requireNonNull(id, "Un Parc doit posséder un ID.");
+        this.nom = Objects.requireNonNull(nom, "Un Parc doit avoir un nom");
+        this.type = Objects.requireNonNull(type, "Un Parc doit avoir un type");
 
         if (capaciteHoraireMW <= 0) {
             throw new IllegalArgumentException("Un Parc doit pouvoir produire");
         }
         this.capaciteHoraireMW = capaciteHoraireMW;
+    }
+
+    public static int recupererCapaciteMultipleParc(Set<Parc> parcs) {
+        return parcs.stream()
+                .mapToInt(Parc::getCapaciteHoraireMW)
+                .sum();
+    }
+
+    public static Parc copyOf(Parc parc) {
+        return new Parc(parc.id, parc.nom, parc.type, parc.capaciteHoraireMW);
     }
 
     public ParcId getId() {
@@ -53,5 +60,15 @@ public class Parc {
     @Override
     public int hashCode() {
         return Objects.hash(id, nom, type, capaciteHoraireMW);
+    }
+
+    @Override
+    public String toString() {
+        return "Parc{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", type=" + type +
+                ", capaciteHoraireMW=" + capaciteHoraireMW +
+                '}';
     }
 }

@@ -1,6 +1,9 @@
 package com.ags.kata.application.dto.response;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
-public record AllocationParcResponseDto(@Positive long id, @Positive long parcId, @Positive int quantite) {
+import java.util.UUID;
+
+public record AllocationParcResponseDto(@NotNull UUID id, @NotNull UUID parcId, @Positive int quantite) {
 }

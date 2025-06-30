@@ -2,19 +2,20 @@ package com.ags.kata.domain.model.bloc;
 
 import org.junit.jupiter.api.Test;
 
+import static com.ags.kata.utils.BlocUtils.BLOC_ID;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BlocIdTest {
 
     @Test
     void shouldBeValid_WhenInstanciatingBlocId_GivenValidData() {
-        var blocId = new BlocId(1L);
+        var blocId = new BlocId(BLOC_ID.id());
         assertNotNull(blocId);
     }
 
     @Test
-    void shouldFail_WhenInstanciatingBlocId_GivenNegativeValue() {
-        assertThrows(IllegalArgumentException.class, () -> new BlocId(0L));
+    void shouldNotThrow_WhenInstanciatingBlocId_GivenNullValue() {
+        var blocId = new BlocId(null);
+        assertNotNull(blocId);
     }
 }

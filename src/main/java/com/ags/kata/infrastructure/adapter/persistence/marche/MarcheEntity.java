@@ -4,7 +4,9 @@ import com.ags.kata.infrastructure.adapter.persistence.offre.OffreEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "marche")
@@ -17,13 +19,13 @@ import java.util.Set;
 public class MarcheEntity {
 
     @Id
-    @SequenceGenerator(name = "marche_seq", sequenceName = "marche_seq", allocationSize = 1)
-    private long id;
+    @Column(columnDefinition = "VARCHAR(36)", unique = true, nullable = false)
+    private UUID id;
 
     @Column(nullable = false)
     private String nom;
 
     @OneToMany(mappedBy = "marche")
     @ToString.Exclude
-    private Set<OffreEntity> offres = Set.of();
+    private Set<OffreEntity> offres = new HashSet<>();
 }

@@ -1,4 +1,6 @@
 package com.ags.kata.application.dto.response;
 
-public record BasicMessageResponseDto(String message) {
+import jakarta.validation.constraints.NotBlank;
+
+public record BasicMessageResponseDto(@NotBlank String message) {
 }

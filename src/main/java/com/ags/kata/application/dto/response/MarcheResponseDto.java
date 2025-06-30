@@ -1,7 +1,9 @@
 package com.ags.kata.application.dto.response;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.NotNull;
 
-public record MarcheResponseDto(@Positive long id, @NotBlank String nom) {
+import java.util.UUID;
+
+public record MarcheResponseDto(@NotNull UUID id, @NotBlank String nom) {
 }

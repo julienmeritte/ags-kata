@@ -7,8 +7,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
-import static com.ags.kata.utils.EntityUtils.PARC_SEQ;
-import static com.ags.kata.utils.EntityUtils.prochainId;
 import static com.ags.kata.utils.ParcUtils.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -23,7 +21,7 @@ class ParcEntityTest {
     @Test
     void shouldPersist_WhenSavingParcEntity_GivenValidData() {
         ParcEntity parcEntity = ParcEntity.builder()
-                .id(prochainId(PARC_SEQ, entityManager))
+                .id(PARC_ID.id())
                 .nom(PARC_NOM)
                 .type(PARC_TYPE)
                 .capaciteHoraireMW(PARC_CAPACITE_HORAIRE_MW)
@@ -37,7 +35,7 @@ class ParcEntityTest {
     @Test
     void shouldThrowsConstraintsViolationHibernate_WhenSavingParcEntity_GivenNullNom() {
         ParcEntity parcEntity = ParcEntity.builder()
-                .id(prochainId(PARC_SEQ, entityManager))
+                .id(PARC_ID.id())
                 .nom(null)
                 .type(PARC_TYPE)
                 .capaciteHoraireMW(PARC_CAPACITE_HORAIRE_MW)
@@ -49,7 +47,7 @@ class ParcEntityTest {
     @Test
     void shouldThrowsConstraintsViolationHibernate_WhenSavingParcEntity_GivenNullType() {
         ParcEntity parcEntity = ParcEntity.builder()
-                .id(prochainId(PARC_SEQ, entityManager))
+                .id(PARC_ID.id())
                 .nom(PARC_NOM)
                 .type(null)
                 .capaciteHoraireMW(PARC_CAPACITE_HORAIRE_MW)

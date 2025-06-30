@@ -6,6 +6,7 @@ import com.ags.kata.domain.model.marche.MarcheId;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public class MarcheQueryJpaAdapter implements MarcheQueryRepository {
@@ -21,5 +22,10 @@ public class MarcheQueryJpaAdapter implements MarcheQueryRepository {
     @Override
     public Optional<Marche> recupererMarcheParId(MarcheId marcheId) {
         return marcheMapper.toDomain(marcheJpaRepository.findById(marcheId.id()));
+    }
+
+    @Override
+    public Set<Marche> recupererTousMarche() {
+        return marcheMapper.toDomain(marcheJpaRepository.findAll());
     }
 }

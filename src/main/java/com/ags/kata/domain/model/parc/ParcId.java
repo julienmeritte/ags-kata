@@ -1,10 +1,12 @@
 package com.ags.kata.domain.model.parc;
 
-public record ParcId(long id) {
+import java.util.UUID;
+
+public record ParcId(UUID id) {
 
     public ParcId {
-        if (id <= 0) {
-            throw new IllegalArgumentException("L'Id Parc doit être positif");
+        if (id == null) {
+            id = UUID.randomUUID();
         }
     }
 }

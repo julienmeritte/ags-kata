@@ -2,49 +2,47 @@ package com.ags.kata.infrastructure.adapter.persistence.parc;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 public interface ParcJpaRepository extends CrudRepository<ParcEntity, Long> {
 
-    @Query(value = "SELECT NEXT VALUE FOR parc_seq", nativeQuery = true)
-    Long prochainId();
+    @Query("""
+                SELECT p as parc,
+                       COALESCE(p.capaciteHoraireMW - COALESCE((
+                           SELECT SUM(a.quantite)\s
+                           FROM AllocationParcEntity a\s
+                           JOIN a.bloc b\s
+                           JOIN b.offre o
+                           WHERE a.parc.id = p.id\s
+                           AND o.jour = :jour\s
+                           AND b.positionJournee = :positionJournee
+                       ), 0), p.capaciteHoraireMW) as capaciteRestante
+                FROM ParcEntity p
+                WHERE (
+                    COALESCE((
+                        SELECT SUM(a.quantite)\s
+                        FROM AllocationParcEntity a\s
+                        JOIN a.bloc b\s
+                        JOIN b.offre o
+                        WHERE a.parc.id = p.id\s
+                        AND o.jour = :jour\s
+                        AND b.positionJournee = :positionJournee
+                    ), 0)
+                ) < p.capaciteHoraireMW
+                ORDER BY capaciteRestante DESC
+            """)
+    List<ParcCapaciteProjection> findParcsAvecCapaciteRestante(@Param("jour") LocalDate jour, @Param("positionJournee") int positionJournee);
 
     @Query("""
-             SELECT p FROM ParcEntity p\s
-             WHERE p.id NOT IN (
-                 SELECT DISTINCT alloc.parc.id\s
-                 FROM AllocationParcEntity alloc\s
-                 JOIN alloc.bloc bloc\s
-                 JOIN bloc.offre offre
-                 WHERE offre.jour = :jour\s
-                 AND bloc.positionJournee = :positionJournee
-                 AND (
-                     SELECT COALESCE(SUM(a.quantite), 0)\s
-                     FROM AllocationParcEntity a\s
-                     JOIN a.bloc b\s
-                     JOIN b.offre o
-                     WHERE a.parc.id = p.id\s
-                     AND o.jour = :jour\s
-                     AND b.positionJournee = :positionJournee
-                 ) + :quantiteRequise > p.capaciteHoraireMW
-             )
-             ORDER BY (
-                 p.capaciteHoraireMW - COALESCE((
-                     SELECT SUM(a.quantite)\s
-                     FROM AllocationParcEntity a\s
-                     JOIN a.bloc b\s
-                     JOIN b.offre o
-                     WHERE a.parc.id = p.id\s
-                     AND o.jour = :jour\s
-                     AND b.positionJournee = :positionJournee
-                 ), 0)
-             ) DESC
+             SELECT DISTINCT p FROM ParcEntity p
+             JOIN AllocationParcEntity ap ON ap.parc.id = p.id
+             JOIN BlocEntity b ON b.id = ap.bloc.id \s
+             JOIN OffreEntity o ON o.id = b.offre.id
+             WHERE o.marche.id = :marcheId
             \s""")
-    List<ParcEntity> findParcsDisponiblesPourBloc(
-            int quantiteRequise,
-            LocalDate jour,
-            int positionJournee
-    );
+    List<ParcEntity> recupererParcsVendantParMarche(@Param("marcheId") UUID marcheId);
 }
